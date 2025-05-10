@@ -1,0 +1,1 @@
+You can generate the faiss.index file by running faiss over the api_doc with the stella_en_400M_v5 model

@@ -1,0 +1,300 @@
+{"question_id": 0, "response": "result = df.shape"}
+{"question_id": 1, "response": "x = x.dropna()"}
+{"question_id": 2, "response": "x.replace(np.nan, np.inf)"}
+{"question_id": 3, "response": "result = [df.iloc[i, j] for i, j in enumerate(df.notna().values.argmax(axis=1))]"}
+{"question_id": 4, "response": "df = pd.get_dummies(series)"}
+{"question_id": 5, "response": "temp = series - series.min()\ndf = pd.DataFrame(0, index=range(len(series)), columns=range(int(temp.max()+1)))\ndf.values[np.arange(len(series)), temp.astype(int)] = 1"}
+{"question_id": 6, "response": "temp = (a - a.min().min()).values.ravel()\nb = pd.DataFrame(np.zeros((a.size, temp.max()+1)))\nb.iloc[np.arange(a.size), temp] = 1"}
+{"question_id": 7, "response": "result = a.quantile(p/100)"}
+{"question_id": 8, "response": "B = pd.DataFrame(A.values.reshape(-1, ncol))"}
+{"question_id": 9, "response": "B = pd.DataFrame(A.values.reshape(nrow, -1))"}
+{"question_id": 10, "response": "col = (len(S) // ncol) * ncol\ndf = pd.DataFrame(S[:col].values.reshape(-1, ncol))"}
+{"question_id": 11, "response": "col = (len(S) // ncol) * ncol\nD = pd.DataFrame(S[len(S)-col:][::-1].values.reshape(-1, ncol))"}
+{"question_id": 12, "response": "result = a.shift(shift)"}
+{"question_id": 13, "response": "result = df.shift(periods=shift, axis=1, fill_value=np.nan)"}
+{"question_id": 14, "response": "def solution(df, shift):\n    result = pd.DataFrame(index=df.index, columns=df.columns)\n    for i, n in enumerate(shift):\n        if n >= 0:\n            result.iloc[i, :n] = np.nan\n            result.iloc[i, n:] = df.iloc[i, :-n]\n        else:\n            result.iloc[i, n:] = np.nan\n            result.iloc[i, :n] = df.iloc[i, -n:]\n    return result\n\nresult = solution(df, shift)"}
+{"question_id": 15, "response": "result = df.values.argmax()"}
+{"question_id": 16, "response": "result = df.values.argmin()"}
+{"question_id": 17, "response": "result = np.unravel_index(df.values.argmax(), df.shape)"}
+{"question_id": 18, "response": "idx = np.unravel_index(df.values.argmax(), df.shape)\ndf.iloc[idx] = df.values.min()\nresult = np.unravel_index(df.values.argmax(), df.shape)"}
+{"question_id": 19, "response": "df = df.loc[:, ~df.isna().any()]"}
+{"question_id": 20, "response": "df = df.dropna(axis=0, how='any')"}
+{"question_id": 21, "response": "result = pd.DataFrame(a)"}
+{"question_id": 22, "response": "result = (df.values.argmin() // df.shape[1], df.values.argmin() % df.shape[1])"}
+{"question_id": 23, "response": "result = np.unravel_index(df.values.argmax(), df.shape)"}
+{"question_id": 24, "response": "result = pd.DataFrame(df.values == df.values.min()).stack().reset_index()[lambda x: x[0]]['level_0'].to_numpy()"}
+{"question_id": 25, "response": "result = data['angle'].apply(lambda x: np.sin(np.deg2rad(x)))"}
+{"question_id": 26, "response": "result = np.cos(np.deg2rad(degree))"}
+{"question_id": 27, "response": "deg = np.sin(np.deg2rad(number))\nrad = np.sin(number)\nresult = int(rad.iloc[0] > deg.iloc[0])"}
+{"question_id": 28, "response": "result = np.degrees(np.arcsin(value))"}
+{"question_id": 29, "response": "df = df ** power"}
+{"question_id": 30, "response": "result = a ** power\n\nreturn result"}
+{"question_id": 31, "response": "gcd = np.gcd(numerator, denominator)\nresult = (numerator//gcd, denominator//gcd)"}
+{"question_id": 32, "response": "gcd = pd.Series([numerator, denominator]).agg(np.gcd.reduce)\nresult = (numerator//gcd, denominator//gcd)\n\nreturn result"}
+{"question_id": 33, "response": "if denominator == 0:\n    result = (np.nan, np.nan)\nelse:\n    gcd = pd.Series([numerator, denominator]).abs().min()\n    while any(x % gcd != 0 for x in [numerator, denominator]):\n        gcd -= 1\n    result = (numerator//gcd, denominator//gcd)"}
+{"question_id": 34, "response": "result = pd.concat([a, b, c], axis=1).mean(axis=1)"}
+{"question_id": 35, "response": "result = pd.concat([a, b, c]).groupby(level=0).max()"}
+{"question_id": 36, "response": "dim = min(df.shape)\nsquare_df = df.iloc[:dim, :dim]\nresult = pd.DataFrame([np.diag(square_df), np.diag(np.fliplr(square_df.values))])"}
+{"question_id": 37, "response": "result = df.values.flatten().tolist()"}
+{"question_id": 38, "response": "result = df.values.flatten().tolist()\nreturn result"}
+{"question_id": 39, "response": "result = pd.Series(list(mystr)).astype(int)"}
+{"question_id": 40, "response": "a[col-1] *= multiply_number\nresult = a[col-1].cumsum()"}
+{"question_id": 41, "response": "a.iloc[row-1] *= multiply_number\nresult = a.iloc[row-1].cumsum()"}
+{"question_id": 42, "response": "a.iloc[row-1] = a.iloc[row-1] / divide_number\nresult = a.iloc[row-1].prod()"}
+{"question_id": 43, "response": "def LI_vecs(M):\n    dim = M.shape[0]\n    LI=[M.iloc[0].values]\n    for i in range(dim):\n        tmp=[]\n        for r in LI:\n            tmp.append(r)\n        tmp.append(M.iloc[i].values)\n        if np.linalg.matrix_rank(tmp)>len(LI):\n            LI.append(M.iloc[i].values)\n    return LI\nresult = LI_vecs(a)"}
+{"question_id": 44, "response": "result = df.shape[1]"}
+{"question_id": 45, "response": "_, p_value = scipy.stats.ttest_ind(a, b, equal_var=False)"}
+{"question_id": 46, "response": "_, p_value = scipy.stats.ttest_ind(a.dropna(), b.dropna(), equal_var=False)"}
+{"question_id": 47, "response": "output = A[~A.apply(tuple, axis=1).isin(B.apply(tuple, axis=1))]"}
+{"question_id": 48, "response": "df = df.drop(columns=[2])"}
+{"question_id": 49, "response": "df = df.drop(2)"}
+{"question_id": 50, "response": "df = df.drop(['A', 'C'], axis=1)"}
+{"question_id": 51, "response": "mask = (del_col <= df.shape[1])\ndel_col = del_col[mask] - 1\nresult = df.drop(columns=del_col)"}
+{"question_id": 52, "response": "df = pd.concat([df.iloc[:pos], element, df.iloc[pos:]]).reset_index(drop=True)"}
+{"question_id": 53, "response": "result = dataframe_of_series.copy(deep=True)"}
+{"question_id": 54, "response": "result = df.eq(df.iloc[0]).all().all()"}
+{"question_id": 55, "response": "result = df.eq(df[0], axis=0).all().all()"}
+{"question_id": 56, "response": "result = df.eq(df.iloc[0]).all().all()\n\nreturn result"}
+{"question_id": 57, "response": "result = pd.Series(range(1, len(grades) + 1)) / len(grades)\nresult.index = grades.sort_values().index\nresult = result.sort_index()"}
+{"question_id": 58, "response": "def ecdf_result(x):\n    xs = x.sort_values()\n    ys = pd.Series(np.arange(1, len(xs)+1))/float(len(xs))\n    return xs, ys\n\nresultx, resulty = ecdf_result(grades)\nresult = pd.Series(np.zeros_like(eval, dtype=float))\nfor i, element in eval.items():\n    if element < resultx.iloc[0]:\n        result[i] = 0\n    elif element >= resultx.iloc[-1]:\n        result[i] = 1\n    else:\n        result[i] = resulty[(resultx > element).idxmax()-1]"}
+{"question_id": 59, "response": "sorted_grades = grades.sort_values()\ncumulative_prob = pd.Series(np.arange(1, len(sorted_grades) + 1) / len(sorted_grades), index=sorted_grades.index)\nt = (cumulative_prob > threshold).argmax()\nlow = sorted_grades.iloc[0]\nhigh = sorted_grades.iloc[t]"}
+{"question_id": 60, "response": "df_np = df.to_numpy()"}
+{"question_id": 61, "response": "result = s.argsort()[::-1][:len(s)]"}
+{"question_id": 62, "response": "result = s.argsort()"}
+{"question_id": 63, "response": "result = s.sort_values(ascending=False).head(N).index"}
+{"question_id": 64, "response": "result = pd.DataFrame(np.linalg.matrix_power(DF.values, n))"}
+{"question_id": 65, "response": "result = pd.DataFrame([df.iloc[i:i+2, j:j+2].values for i in range(0, len(df), 2) for j in range(0, len(df.columns), 2)])"}
+{"question_id": 66, "response": "result = pd.DataFrame(np.lib.stride_tricks.sliding_window_view(df.values, window_shape=(2,2)).reshape(-1, 2, 2))"}
+{"question_id": 67, "response": "result = df.loc[:, start_col:end_col]"}
+{"question_id": 68, "response": "result = df.iloc[low:high, :]"}
+{"question_id": 69, "response": "result = df.iloc[:, df.columns.get_loc(start_col):df.columns.get_loc(end_col)]"}
+{"question_id": 70, "response": "df = pd.DataFrame(np.array(np.matrix(string.replace(',', ';'))))"}
+{"question_id": 71, "response": "result = pd.Series(np.exp(np.random.uniform(low=np.log(min), high=np.log(max), size=n)))"}
+{"question_id": 72, "response": "B = pd.Series(index=A.index)\nB.iloc[0] = a * A.iloc[0]\nB.iloc[1:] = a * A.iloc[1:] + b * B.iloc[:-1].values"}
+{"question_id": 73, "response": "B = pd.Series(index=A.index, dtype=float)\nB.iloc[0] = a * A.iloc[0]\nB.iloc[1] = a * A.iloc[1] + b * B.iloc[0]\nfor k in range(2, len(A)):\n    B.iloc[k] = a * A.iloc[k] + b * B.iloc[k-1] + c * B.iloc[k-2]"}
+{"question_id": 74, "response": "result = pd.MultiIndex.from_tuples([index], names=range(len(dims))).get_indexer_for([0])[0]"}
+{"question_id": 75, "response": "result = index.get_indexer([tuple_index])[0]"}
+{"question_id": 76, "response": "df = pd.DataFrame(0, index=index, columns=columns, dtype=float)\ndf['a'] = df['a'].astype(int)"}
+{"question_id": 77, "response": "result = s.groupby(groups).max()"}
+{"question_id": 78, "response": "add = index.max()\nmask = index < 0\nindex[mask] += add + 1\nresult = s.groupby(index).min()"}
+{"question_id": 79, "response": "z = x + y"}
+{"question_id": 80, "response": "pd.np.random.seed(42)\nresult = df_elegir.sample(n=samples, weights=probabilit, replace=True)"}
+{"question_id": 81, "response": "def fill_crop_pd(df, pos, crop_df):\n    df_shape = np.array(df.shape)\n    pos = np.array(pos)\n    crop_shape = np.array(crop_df.shape)\n    end = pos + crop_shape\n    \n    crop_low = np.clip(0 - pos, a_min=0, a_max=crop_shape)\n    crop_high = crop_shape - np.clip(end-df_shape, a_min=0, a_max=crop_shape)\n    pos = np.clip(pos, a_min=0, a_max=df_shape)\n    end = np.clip(end, a_min=0, a_max=df_shape)\n    \n    crop_df.iloc[crop_low[0]:crop_high[0], crop_low[1]:crop_high[1]] = df.iloc[pos[0]:end[0], pos[1]:end[1]].values\n    return crop_df\n\nresult = fill_crop_pd(df, [low_index, low_index], pd.DataFrame(np.zeros((high_index-low_index, high_index-low_index))))"}
+{"question_id": 82, "response": "result = s[s >= 0]"}
+{"question_id": 83, "response": "bin_data_max = data.iloc[:(len(data) // bin_size) * bin_size].groupby(np.arange(len(data)) // bin_size).max()"}
+{"question_id": 84, "response": "bin_data_mean = data[::-1].iloc[:(len(data) // bin_size) * bin_size].groupby(np.arange(len(data)) // bin_size).mean()"}
+{"question_id": 85, "response": "bin_data_mean = data.iloc[:, ::-1].iloc[:, :(data.shape[1] // bin_size) * bin_size].groupby(np.arange(data.shape[1]) // bin_size, axis=1).mean().iloc[:, ::-1]"}
+{"question_id": 86, "response": "def smoothclamp(x):\n    return pd.Series(np.where(x < x_min, x_min, np.where(x > x_max, x_max, 3*x**2 - 2*x**3)))"}
+{"question_id": 87, "response": "def smoothclamp(x, x_min=0, x_max=1, N=1):\n    if isinstance(x, (int, float)):\n        if x < x_min:\n            return x_min\n        if x > x_max:\n            return x_max\n        x = np.clip((x - x_min) / (x_max - x_min), 0, 1)\n        result = 0\n        for n in range(0, N + 1):\n            result += comb(N + n, n) * comb(2 * N + 1, N - n) * (-x) ** n\n        result *= x ** (N + 1)\n        return result\n    else:\n        result = pd.Series(index=x.index)\n        mask_min = x < x_min\n        mask_max = x > x_max\n        mask_mid = ~(mask_min | mask_max)\n        \n        result[mask_min] = x_min\n        result[mask_max] = x_max\n        \n        x_scaled = np.clip((x[mask_mid] - x_min) / (x_max - x_min), 0, 1)\n        temp_result = pd.Series(0, index=x_scaled.index)\n        \n        for n in range(0, N + 1):\n            temp_result += comb(N + n, n) * comb(2 * N + 1, N - n) * (-x_scaled) ** n\n            \n        result[mask_mid] = temp_result * x_scaled ** (N + 1)\n        return result"}
+{"question_id": 88, "response": "result = pd.Series(np.correlate(a.values, np.hstack((b.values[1:], b.values)), mode='valid'))"}
+{"question_id": 89, "response": "result = (s.mean()-3*s.std(), s.mean()+3*s.std())"}
+{"question_id": 90, "response": "result = (s.mean()-2*s.std(), s.mean()+2*s.std())"}
+{"question_id": 91, "response": "result = (s.mean()-3*s.std(), s.mean()+3*s.std())\n\nreturn result"}
+{"question_id": 92, "response": "interval = (s.mean()-2*s.std(), s.mean()+2*s.std())\nresult = ~((s>interval[0]) & (s<interval[1]))"}
+{"question_id": 93, "response": "prob = DataArray[DataArray >= 0].quantile(percentile/100)"}
+{"question_id": 94, "response": "df.iloc[zero_rows, :] = 0\ndf.iloc[:, zero_cols] = 0"}
+{"question_id": 95, "response": "df.iloc[zero_rows, :] = 0\ndf.iloc[:, zero_cols] = 0"}
+{"question_id": 96, "response": "df.iloc[1, :] = 0\ndf.iloc[:, 0] = 0"}
+{"question_id": 97, "response": "mask = df.eq(df.max(axis=1), axis=0)"}
+{"question_id": 98, "response": "mask = df.eq(df.min(axis=1), axis=0)"}
+{"question_id": 99, "response": "result = post.corr(distance)"}
+{"question_id": 100, "response": "X = pd.DataFrame(np.array([np.sqrt(np.diag(mat)) for mat in Y]).T)"}
+{"question_id": 101, "response": "is_contained = number in s.values"}
+{"question_id": 102, "response": "C = A[~A.isin(B)]"}
+{"question_id": 103, "response": "C = A[A.isin(B)]"}
+{"question_id": 104, "response": "C = A[(A > B[0]) & (A < B[1]) | (A > B[1]) & (A < B[2])]"}
+{"question_id": 105, "response": "result = len(s) - s.rank(method='average').astype(int)\n\nreturn result"}
+{"question_id": 106, "response": "result = X.div(X.abs().sum(axis=1), axis=0)"}
+{"question_id": 107, "response": "l2 = np.sqrt((X**2).sum(axis=1))\nresult = X.div(l2, axis=0)"}
+{"question_id": 108, "response": "result = X.div(X.abs().max(axis=1), axis=0)"}
+{"question_id": 109, "response": "result = pd.DataFrame(np.linalg.norm(data.values[:, np.newaxis] - data.values, axis=-1))"}
+{"question_id": 110, "response": "result = pd.DataFrame(np.triu(np.linalg.norm(a.values[:, None] - a.values, axis=-1)), index=a.index, columns=a.index)"}
+{"question_id": 111, "response": "result = a[(a != a.shift()) & (a != 0)].reset_index(drop=True)"}
+{"question_id": 112, "response": "result = a[((a != a.shift()) | (a.index == 0)) & (a != 0)].reset_index(drop=True)"}
+{"question_id": 113, "response": "df = pd.DataFrame({'lat': lat, 'lon': lon, 'val': val})"}
+{"question_id": 114, "response": "df = pd.DataFrame({'lat': lat, 'lon': lon, 'val': val})\ndf['maximum'] = df[['lat', 'lon', 'val']].max(axis=1)"}
+{"question_id": 115, "response": "def window(df, shape=(3, 3)):\n    ans = []\n    r_win = np.floor(shape[0] / 2).astype(int)\n    c_win = np.floor(shape[1] / 2).astype(int)\n    x, y = df.shape\n    for i in range(x):\n        xmin = max(0, i - r_win)\n        xmax = min(x, i + r_win + 1)\n        for j in range(y):\n            ymin = max(0, j - c_win)\n            ymax = min(y, j + c_win + 1)\n            ans.append(df.iloc[xmin:xmax, ymin:ymax])\n    return ans\n\nresult = window(df, size)"}
+{"question_id": 116, "response": "n = len(a)\ns = a.sum()\nresult = np.real(s) / n + 1j * np.imag(s) / n"}
+{"question_id": 117, "response": "result = df.iloc[-1:,:]"}
+{"question_id": 118, "response": "result = any(c.equals(x) for x in CNTS)"}
+{"question_id": 119, "response": "temp_c = c.copy()\ntemp_c = temp_c.fillna(0)\nresult = False\nfor df in CNTS:\n    temp = df.copy()\n    temp = temp.fillna(0)\n    result |= temp_c.equals(temp) and (c.isna() == df.isna()).all().all()"}
+{"question_id": 120, "response": "x = np.arange(len(df.columns))\ny = np.arange(len(df))\nf = intp.interp2d(x, y, df.values)\nresult = f(x_new, x_new)"}
+{"question_id": 121, "response": "df = pd.DataFrame(data)\ndf[name] = df.groupby('D')['Q'].cumsum()"}
+{"question_id": 122, "response": "i = pd.DataFrame(np.diag(i))"}
+{"question_id": 123, "response": "result = pd.date_range(start=start, end=end, periods=n)"}
+{"question_id": 124, "response": "result = ((x == a) & (y == b)).idxmax() if ((x == a) & (y == b)).any() else -1"}
+{"question_id": 125, "response": "result = x[((x == a) & (y == b))].index"}
+{"question_id": 126, "response": "result = np.polyfit(data['x'], data['y'], 2)"}
+{"question_id": 127, "response": "df = df.subtract(pd.Series(a), axis=0)"}
+{"question_id": 128, "response": "scaler = MinMaxScaler()\nresult = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)"}
+{"question_id": 129, "response": "result = (~pd.isclose(s1,s2)).sum()"}
+{"question_id": 130, "response": "def all_equal(iterator):\n    try:\n        iterator = iter(iterator)\n        first = next(iterator)\n        return all(first.equals(rest) for rest in iterator)\n    except StopIteration:\n        return True\nresult = all_equal(a)"}
+{"question_id": 131, "response": "result = all(series.isna().any() for series in a)"}
+{"question_id": 132, "response": "result = pd.concat([df, pd.DataFrame(0, index=range(41, length), columns=df.columns)])"}
+{"question_id": 133, "response": "def pad_dataframe(df, max_length):\n    current_length = len(df)\n    pad_length = max_length - current_length\n    pad_top = pad_length // 2\n    pad_bottom = pad_length - pad_top\n    \n    top_df = pd.DataFrame(0, index=range(pad_top), columns=df.columns)\n    bottom_df = pd.DataFrame(0, index=range(pad_bottom), columns=df.columns)\n    \n    result = pd.concat([top_df, df, bottom_df], axis=0)\n    return result\n\nresult = pad_dataframe(df, max_length)"}
+{"question_id": 134, "response": "a = pd.DataFrame(a.values.reshape(-1, 3))"}
+{"question_id": 135, "response": "result = df.loc[(df['a'] <= 4) & (df['a'] > 1), 'b'].reindex(df.index)"}
+{"question_id": 136, "response": "mask = df == 0\nrows = np.flatnonzero((~mask).sum(axis=1))\ncols = np.flatnonzero((~mask).sum(axis=0))\nif rows.shape[0] == 0:\n    result = pd.DataFrame([])\nelse:\n    result = df.iloc[rows.min():rows.max()+1, cols.min():cols.max()+1]"}
+{"question_id": 137, "response": "result = df.iloc[List].reset_index(drop=True)"}
+{"question_id": 138, "response": "def g(df, List):\n    df2 = df.iloc[List].reset_index(drop=True)\n    return (df2['Type'] != df['Type']).sum()\n\nresult = g(df.copy(), List)"}
+{"question_id": 139, "response": "def g(df):\n    result = df.copy()\n    for col in df.columns:\n        value_counts = df[col].value_counts()\n        mask = df[col].map(value_counts) < 3\n        result.loc[mask, col] = 'other'\n    return result\n\nresult = g(df)"}
+{"question_id": 140, "response": "result = df[df['keep_if_dup'].eq('Yes') | ~df['url'].duplicated()]"}
+{"question_id": 141, "response": "result = df[\n    (df['drop_if_dup'] == 'No') |\n    (~df['url'].duplicated())\n].reset_index(drop=True)"}
+{"question_id": 142, "response": "df['id'] = range(1, len(df) + 1)\nmask = (df['keep_if_dup'] == 'Yes') | ~df['url'].duplicated()\nresult = df[mask][['id', 'url', 'keep_if_dup']]"}
+{"question_id": 143, "response": "def g(df):\n    if len(df.columns) == 1:\n        if len(df) == 1:\n            return df.iloc[0, 0]\n        return df.iloc[:, 0].tolist()\n    unique_keys = df.iloc[:, 0].unique()\n    d = {k: g(df[df.iloc[:, 0] == k].iloc[:, 1:]) for k in unique_keys}\n    return d\n\nresult = g(df.copy())"}
+{"question_id": 144, "response": "df['datetime'] = pd.to_datetime(df['datetime'], utc=True)"}
+{"question_id": 145, "response": "df['datetime'] = df['datetime'].dt.tz_localize('UTC').dt.tz_convert('America/Chicago')\nresult = df\nreturn result"}
+{"question_id": 146, "response": "df = df.sort_values('datetime').reset_index(drop=True)"}
+{"question_id": 147, "response": "def parse_message(msg):\n    msg = msg.replace('[', '{').replace(']', '}')\n    parsed = yaml.safe_load(msg)\n    keys = ['job', 'money', 'wife', 'group', 'kids']\n    return pd.Series({key: parsed.get(key, 'none') for key in keys})\n\nexpanded = df['message'].apply(parse_message)\nexpanded = expanded.replace('', 'none')\nresult = pd.concat([df[['name', 'status', 'number']], expanded], axis=1)"}
+{"question_id": 148, "response": "for product_range in products:\n    mask = (df['product'] >= product_range[0]) & (df['product'] <= product_range[1])\n    df.loc[mask, 'score'] *= 10"}
+{"question_id": 149, "response": "mask = df['product'].isin(products)\nmax_score = df.loc[mask, 'score'].max()\nmin_score = df.loc[mask, 'score'].min()\ndf.loc[mask, 'score'] = (df.loc[mask, 'score'] - min_score) / (max_score - min_score)"}
+{"question_id": 150, "response": "df['Date'] = df['Date'].dt.strftime('%d-%b-%Y')"}
+{"question_id": 151, "response": "df = df[(df['Date'] >= pd.to_datetime(List[0])) & (df['Date'] <= pd.to_datetime(List[1]))]\ndf['Date'] = df['Date'].dt.strftime('%d-%b-%Y %A')"}
+{"question_id": 152, "response": "df['#1'] = df['#1'].shift(-1).fillna(df['#1'].iloc[0])"}
+{"question_id": 153, "response": "df['#1'] = df['#1'].shift(-1)"}
+{"question_id": 154, "response": "df['#1'] = df['#1'].shift(1)\ndf['#2'] = df['#2'].shift(-1)"}
+{"question_id": 155, "response": "def g(df):\n    sh = 0\n    min_R2 = ((df['#1'] - df['#2'])**2).sum()\n    for i in range(len(df)):\n        R2 = ((df['#1'] - df['#2'])**2).sum()\n        if min_R2 > R2:\n            sh = i\n            min_R2 = R2\n        df['#1'] = df['#1'].shift(-1).fillna(df['#1'].iloc[0])\n    for _ in range(sh):\n        df['#1'] = df['#1'].shift(-1).fillna(df['#1'].iloc[0])\n    return df\n\ndf = g(df)"}
+{"question_id": 156, "response": "df = df.add_suffix('X')"}
+{"question_id": 157, "response": "df = df.rename(columns=lambda x: 'X' + x)"}
+{"question_id": 158, "response": "def g(df):\n    new_headers = []\n    for col in df.columns:\n        if not col.endswith('X'):\n            new_headers.append(col + 'X')\n        else:\n            new_headers.append(col)\n    new_headers = ['X' + col for col in new_headers]\n    df.columns = new_headers\n    return df\n\ndf = g(df.copy())"}
+{"question_id": 159, "response": "result = df.groupby(['group', 'group_color']).agg({\n    'val1': 'mean',\n    'val2': 'mean',\n    'val3': 'mean'\n}).reset_index()"}
+{"question_id": 160, "response": "result = df.groupby(['group', 'group_color']).agg({\n    'val1': 'sum',\n    'val2': 'sum',\n    'val3': 'sum'\n}).reset_index()"}
+{"question_id": 161, "response": "result = df.eq('null').sum().astype(float)"}
+{"question_id": 162, "response": "def g(df):\n    s = ''\n    for i, col in enumerate(df.columns):\n        s += f\"---- {i} ---\\n\"\n        value_counts = df[col].value_counts()\n        for val, count in value_counts.items():\n            s += f\"{val}    {count}\\n\"\n    return s\n\nresult = g(df.copy())"}
+{"question_id": 163, "response": "def justify(df, invalid_val=np.nan, axis=1, side='left'):\n    if axis == 1:\n        df = df.copy()\n    else:\n        df = df.T.copy()\n    \n    mask = ~df.isna() if np.isnan(invalid_val) else df != invalid_val\n    values = df[mask].values.ravel()\n    \n    for i in range(len(df)):\n        row_mask = mask.iloc[i]\n        n_valid = row_mask.sum()\n        if n_valid:\n            if side in ['up', 'left']:\n                df.iloc[i] = [*values[:n_valid], *[invalid_val] * (len(df.columns) - n_valid)]\n                values = values[n_valid:]\n            else:\n                df.iloc[i] = [*[invalid_val] * (len(df.columns) - n_valid), *values[:n_valid]]\n                values = values[n_valid:]\n    \n    return df if axis == 1 else df.T\n\nresult = justify(df, invalid_val=np.nan, axis=1, side='left')"}
+{"question_id": 164, "response": "result = pd.DataFrame(df.values[~np.isnan(df.values)].reshape(-1, df.shape[1]), columns=df.columns).reindex(index=range(len(df))).fillna(np.nan)"}
+{"question_id": 165, "response": "mask = df['value'] >= thresh\nresult = pd.concat([\n    df[mask],\n    pd.DataFrame({'value': df[~mask]['value'].sum()}, index=['X'])\n])"}
+{"question_id": 166, "response": "result = pd.concat([\n    df[df['value'] <= thresh],\n    pd.DataFrame({'value': df[df['value'] > thresh]['value'].mean()}, index=['X'])\n])"}
+{"question_id": 167, "response": "def g(df, section_left, section_right):\n    mask = (df['value'] >= section_left) & (df['value'] <= section_right)\n    filtered_df = df[mask]\n    mean_value = df[~mask]['value'].mean()\n    new_row = pd.DataFrame({'value': [mean_value]}, index=['X'])\n    return pd.concat([filtered_df, new_row])\n\nresult = g(df.copy(), section_left, section_right)"}
+{"question_id": 168, "response": "result = pd.concat([df, df.apply(np.exp)], axis=1)"}
+{"question_id": 169, "response": "def g(df):\n    inv_df = df.where(df != 0, 0).replace({0: 0}).mask(df != 0, 1/df)\n    return pd.concat([df, inv_df], axis=1)\n\nresult = g(df.copy())"}
+{"question_id": 170, "response": "def g(df):\n    sigmoid = 1 / (1 + np.exp(-df))\n    return pd.concat([df, sigmoid], axis=1)\n\nresult = g(df.copy())"}
+{"question_id": 171, "response": "def g(df):\n    min_values = df.min()\n    mask = df.eq(min_values).cumsum() > 0\n    masked_df = df.mask(mask)\n    return masked_df.iloc[::-1].idxmax()\n\nresult = g(df)"}
+{"question_id": 172, "response": "result = df.apply(lambda x: x[x >= x.min()].idxmax())"}
+{"question_id": 173, "response": "dates = pd.date_range('2016-01-01', '2016-01-06')\nall_users = df['user'].unique()\nindex = pd.MultiIndex.from_product([dates, all_users], names=['dt', 'user'])\nresult = pd.DataFrame(index=index).reset_index()\nresult = result.merge(df, on=['dt', 'user'], how='left')\nresult['val'] = result['val'].fillna(0).astype(int)\nresult = result.sort_values(['dt', 'user']).reset_index(drop=True)"}
+{"question_id": 174, "response": "def g(df):\n    min_date = df['dt'].min()\n    max_date = df['dt'].max()\n    all_dates = pd.date_range(min_date, max_date)\n    \n    result = []\n    for user in df['user'].unique():\n        user_data = df[df['user'] == user]\n        max_val = user_data['val'].max()\n        \n        for date in all_dates:\n            if date in user_data['dt'].values:\n                val = user_data[user_data['dt'] == date]['val'].iloc[0]\n            else:\n                val = max_val\n            result.append({'dt': date, 'user': user, 'val': val})\n            \n    return pd.DataFrame(result)\n\nresult = g(df.copy())"}
+{"question_id": 175, "response": "result = df.copy()\nresult['name'] = pd.factorize(result['name'])[0] + 1"}
+{"question_id": 176, "response": "result = df.copy()\nresult['a'] = pd.factorize(result['a'])[0] + 1"}
+{"question_id": 177, "response": "F = {}\ncnt = 0\nfor idx, name in enumerate(df['name'].unique()):\n    if name not in F:\n        cnt += 1\n        F[name] = cnt\ndf['name'] = df['name'].map(F)\nresult = df\nreturn result"}
+{"question_id": 178, "response": "df = pd.melt(df, id_vars=['user', 'someBool'], var_name='date', value_name='value')"}
+{"question_id": 179, "response": "df = pd.DataFrame({\n    'user': df['user'].repeat(2),\n    '01/12/15': df['01/12/15'].repeat(2),\n    'others': ['02/12/15', 'someBool'] * len(df),\n    'value': pd.concat([df['02/12/15'], df['someBool']])\n}).reset_index(drop=True)"}
+{"question_id": 180, "response": "result = df[df['c'] > 0.5][columns]"}
+{"question_id": 181, "response": "result = df[df['c'] > 0.45][columns]"}
+{"question_id": 182, "response": "ans = df[df['c'] > 0.5][columns]\n    sums = ans.sum(axis=1).to_frame('sum')\n    result = pd.concat([ans, sums], axis=1)\n    \n    return result"}
+{"question_id": 183, "response": "result = df.groupby(df.index // 4)['col1'].sum()"}
+{"question_id": 184, "response": "def g(df):\n    n = len(df)\n    df['indices'] = (np.arange(n) + (-n % 3)) // 3\n    return df.groupby('indices')['col1'].mean().values\n\nresult = g(df.copy())"}
+{"question_id": 185, "response": "def g(df):\n    arr = df['col1'].values\n    l = []\n    for i in range(2 * (len(arr) // 5) + (len(arr) % 5) // 3 + 1):\n        l.append(0)\n    for i in range(len(arr)):\n        idx = 2 * (i // 5) + (i % 5) // 3\n        if i % 5 < 3:\n            l[idx] += arr[i]\n        elif i % 5 == 3:\n            l[idx] = arr[i]\n        else:\n            l[idx] = (l[idx] + arr[i]) / 2\n    return pd.Series(l)\n\nresult = g(df)"}
+{"question_id": 186, "response": "def g(df):\n    arr = df['col1'].values\n    l = []\n    for i in range(2 * (len(arr) // 5) + (len(arr) % 5) // 3 + 1):\n        l.append(0)\n    for i in reversed(range(len(arr))):\n        idx = 2 * ((len(arr) - 1 - i) // 5) + ((len(arr) - 1 - i) % 5) // 3\n        if (len(arr) - 1 - i) % 5 < 3:\n            l[idx] += arr[i]\n        elif (len(arr) - 1 - i) % 5 == 3:\n            l[idx] = arr[i]\n        else:\n            l[idx] = (l[idx] + arr[i]) / 2\n    return pd.Series(l)\n\nresult = g(df)"}
+{"question_id": 187, "response": "df['A'] = df['A'].replace(to_replace=0, method='ffill')"}
+{"question_id": 188, "response": "def g(df):\n    df['time'] = df['duration'].str.extract('([a-zA-Z]+)')[0]\n    df['number'] = df['duration'].str.extract('(\\d+)')[0]\n    df['time_days'] = df['time'].map({'year': 365, 'month': 30, 'week': 7, 'day': 1})\n    return df\n\ndf = g(df.copy())"}
+{"question_id": 189, "response": "def g(df1, df2, columns_check_list):\n    return (df1[columns_check_list] != df2[columns_check_list]).any(axis=1)\n\nresult = g(df1, df2, columns_check_list)"}
+{"question_id": 190, "response": "result = (df1[columns_check_list] == df2[columns_check_list]).any(axis=1)"}
+{"question_id": 191, "response": "df = df.melt(id_vars=['Country', 'Variable'], var_name='Year', value_name='Value')\ndf = df.sort_values(['Country', 'Year'], ascending=[True, False])\ndf = df.pivot_table(index=['Country', 'Year'], columns='Variable', values='Value', aggfunc='first').reset_index()\ndf.columns.name = None"}
+{"question_id": 192, "response": "df = df[df[['Value_B', 'Value_C', 'Value_D']].abs().lt(1).all(axis=1)]"}
+{"question_id": 193, "response": "df = df[df[['Value_B', 'Value_C', 'Value_D']].abs().gt(1).any(axis=1)]"}
+{"question_id": 194, "response": "def g(df):\n    for col in df.columns:\n        for idx in df.index:\n            if isinstance(df.at[idx, col], str) and '&AMP;' in df.at[idx, col]:\n                df.at[idx, col] = df.at[idx, col].replace('&AMP;', '&')\n                df.at[idx, col] = df.at[idx, col] + ' = ' + str(eval(df.at[idx, col]))\n    return df\n\ndf = g(df.copy())"}
+{"question_id": 195, "response": "df[['first_name', 'last_name']] = df['name'].str.extract(r'^(\\S+)(?:\\s+(.+))?$')\ndf = df.drop('name', axis=1)"}
+{"question_id": 196, "response": "df[['first_name', 'last_name']] = df['name'].str.split(n=1, expand=True)\ndf['last_name'] = df['last_name'].fillna('')\ndf = df[['first_name', 'last_name']]"}
+{"question_id": 197, "response": "df = df[~df['Field1'].apply(lambda x: isinstance(x, int))]['Field1'].tolist()"}
+{"question_id": 198, "response": "df = df[df['Field1'].apply(lambda x: isinstance(x, int))]"}
+{"question_id": 199, "response": "result = df[~((df['Field1'].apply(lambda x: isinstance(x, int)) | (df['Field1'].apply(lambda x: isinstance(x, float)) & df['Field1'].apply(lambda x: float(x).is_integer())))]['Field1'].tolist()\n\nreturn result"}
+{"question_id": 200, "response": "numeric_cols = ['val1', 'val2', 'val3', 'val4']\nrow_sums = df[numeric_cols].sum(axis=1)\ndf[numeric_cols] = df[numeric_cols].div(row_sums, axis=0)"}
+{"question_id": 201, "response": "df['keywords_all'] = df.filter(like='keywords_').apply(lambda x: '-'.join([str(i) for i in x.dropna()])[::-1], axis=1)"}
+{"question_id": 202, "response": "def g(df):\n    np.random.seed(0)\n    l = int(0.2 * len(df))\n    indices = np.random.choice(len(df), l, replace=False)\n    df.loc[indices, 'Quantity'] = 0\n    return df\n\ndf = g(df.copy())"}
+{"question_id": 203, "response": "def g(df):\n    np.random.seed(0)\n    l = int(0.2 * len(df))\n    indices = np.random.choice(len(df), l, replace=False)\n    df.loc[indices, 'ProductId'] = 0\n    return df\n\ndf = g(df.copy())"}
+{"question_id": 204, "response": "def g(df):\n    unique_users = df['UserId'].unique()\n    for user in unique_users:\n        user_mask = df['UserId'] == user\n        user_rows = df[user_mask]\n        l = int(0.2 * len(user_rows))\n        np.random.seed(0)\n        selected_indices = np.random.choice(user_rows.index, l, replace=False)\n        df.loc[selected_indices, 'Quantity'] = 0\n    return df\n\ndf = g(df.copy())"}
+{"question_id": 205, "response": "duplicates = df[df.duplicated(keep=False)]\nfirst_occurrence = df.drop_duplicates().index\nduplicates_without_first = df[df.duplicated(keep='first')]\nresult = pd.concat([duplicates_without_first, pd.DataFrame(first_occurrence[duplicates_without_first.groupby(duplicates_without_first.columns.tolist()).ngroup()], columns=['index_col'])], axis=1)"}
+{"question_id": 206, "response": "def g(df):\n    df = df.copy()\n    df['group'] = df.groupby(['col1', 'col2']).cumcount()\n    df['last_index'] = df.groupby(['col1', 'col2'])['group'].transform('max')\n    df['original_index'] = df.index\n    duplicates = df.groupby(['col1', 'col2']).filter(lambda x: len(x) > 1)\n    result = duplicates[['col1', 'col2', 'last_index']]\n    return result\n\nresult = g(df)"}
+{"question_id": 207, "response": "def g(df):\n    cols = df.iloc[:, 1:]\n    duplicates = cols.duplicated(keep='first')\n    first_occurrences = cols[~duplicates].index\n    duplicated_rows = df[duplicates]\n    index_col = []\n    for _, row in duplicated_rows.iterrows():\n        mask = (cols == row[cols.columns]).all(axis=1)\n        first_occurrence = first_occurrences[mask][0]\n        index_col.append(first_occurrence)\n    result_df = pd.concat([duplicated_rows, pd.Series(index_col, name='index_col')], axis=1)\n    return result_df\n\nresult = g(df.copy())"}
+{"question_id": 208, "response": "def g(df):\n    cols = df[['col1', 'col2']]\n    index_original = pd.Series(0, index=df.index)\n    for i in df.index:\n        matches = (cols == cols.loc[i]).all(axis=1)\n        index_original[i] = matches[matches].index[-1]\n    for i in reversed(df.index):\n        origin = index_original[i]\n        if i <= origin:\n            continue\n        if origin == index_original[origin]:\n            index_original[origin] = i\n        index_original[i] = index_original[origin]\n    duplicates = df.index[df.apply(lambda x: ((cols == cols.loc[x.name]).all(axis=1)).sum() > 1, axis=1)]\n    return pd.concat([df.loc[duplicates], index_original[duplicates].to_frame()], axis=1)\n\nresult = g(df.copy())"}
+{"question_id": 209, "response": "result = df.loc[df.groupby(['Sp', 'Value'])['count'].transform('max') == df['count']]"}
+{"question_id": 210, "response": "result = df[df['Category'].isin(filter_list)][['Index', 'Category']]"}
+{"question_id": 211, "response": "result = df[~df['Category'].isin(filter_list)][['Index', 'Category']]"}
+{"question_id": 212, "response": "def g(df):\n    result = []\n    for col_idx, col in enumerate(df.columns.get_level_values(2)):\n        for row_idx in range(len(df)):\n            row = [chr(69 + col_idx), chr(66 + col_idx // 2), 'A', df.iloc[row_idx, col_idx]]\n            result.append(row)\n    return pd.DataFrame(result)\n\nresult = g(df.copy())"}
+{"question_id": 213, "response": "df['cumsum'] = df.groupby('id')['val'].transform('cumsum')\ndf = df[['id', 'stuff', 'val', 'cumsum']]"}
+{"question_id": 214, "response": "df['cumsum'] = df.groupby('id')['val'].transform('cumsum')"}
+{"question_id": 215, "response": "result = df.groupby('l')['v'].sum()"}
+{"question_id": 216, "response": "result = df.groupby('r')['v'].sum()"}
+{"question_id": 217, "response": "def get_relation(col1, col2):\n    unique_col1 = col1.value_counts()\n    unique_col2 = col2.value_counts()\n    first_max = unique_col1.max()\n    second_max = unique_col2.max()\n    if first_max == 1:\n        if second_max == 1:\n            return 'one-to-one'\n        else:\n            return 'one-to-many'\n    else:\n        if second_max == 1:\n            return 'many-to-one'\n        else:\n            return 'many-to-many'\n\ndef g(df):\n    columns = df.columns\n    n = len(columns)\n    result = pd.DataFrame(index=columns, columns=columns)\n    for i in range(n):\n        for j in range(n):\n            if i == j:\n                result.iloc[i, j] = 'NaN'\n            else:\n                result.iloc[i, j] = get_relation(df[columns[i]], df[columns[j]])\n    return result\n\nresult = g(df)"}
+{"question_id": 218, "response": "def get_relation(series1, series2):\n    value_counts1 = series1.value_counts()\n    value_counts2 = series2.value_counts()\n    first_max = value_counts1.max()\n    second_max = value_counts2.max()\n    if first_max == 1:\n        if second_max == 1:\n            return 'one-2-one'\n        else:\n            return 'one-2-many'\n    else:\n        if second_max == 1:\n            return 'many-2-one'\n        else:\n            return 'many-2-many'\n\ndef g(df):\n    col_names = df.columns\n    result = pd.DataFrame(index=col_names, columns=col_names)\n    for i, col_i in enumerate(col_names):\n        for j, col_j in enumerate(col_names):\n            if i == j:\n                result.iloc[i, j] = 'NaN'\n            else:\n                result.iloc[i, j] = get_relation(df[col_i], df[col_j])\n    return result\n\nresult = g(df)"}
+{"question_id": 219, "response": "df['Family'] = np.where((df['SibSp'] + df['Parch']) >= 1, 'Has Family', 'No Family')\nresult = df.groupby('Family')['Survived'].mean().to_dict()"}
+{"question_id": 220, "response": "df['Family'] = np.where((df['SibSp'] + df['Parch']) >= 1, 'Has Family', 'No Family')\nresult = df.groupby('Family')['Survived'].mean().to_dict()"}
+{"question_id": 221, "response": "def g(df):\n    conditions = [\n        ((df['SibSp'] == 0) & (df['Parch'] == 0)),\n        ((df['SibSp'] == 1) & (df['Parch'] == 1)),\n        ((df['SibSp'] == 0) & (df['Parch'] == 1)),\n        ((df['SibSp'] == 1) & (df['Parch'] == 0))\n    ]\n    choices = ['No Family', 'Has Family', 'New Family', 'Old Family']\n    df['Family'] = np.select(conditions, choices)\n    return df.groupby('Family')['Survived'].mean().to_dict()\n\nresult = g(df.copy())"}
+{"question_id": 222, "response": "result = df.sort_values(['cokey', 'A'])"}
+{"question_id": 223, "response": "df = df.reindex(sorted(df.columns, key=lambda x: (x[0], x[1], x[2])), axis=1)"}
+{"question_id": 224, "response": "result = pd.DataFrame(list(zip(someTuple[0], someTuple[1])), columns=['Bird', 'Count'])"}
+{"question_id": 225, "response": "result = df.groupby('a')['b'].agg(['mean', 'std']).reset_index()"}
+{"question_id": 226, "response": "result = df.groupby('b')['a'].agg(['mean', 'std']).apply(tuple, axis=1).to_dict()"}
+{"question_id": 227, "response": "df['softmax'] = df.groupby('a').apply(lambda x: np.exp(x['b']) / np.exp(x['b']).sum()).reset_index(level=0, drop=True)\ndf['min_max'] = df.groupby('a').apply(lambda x: (x['b'] - x['b'].min()) / (x['b'].max() - x['b'].min())).reset_index(level=0, drop=True)"}
+{"question_id": 228, "response": "result = df.loc[df.max(axis=1) != 2, df.max(axis=0) != 2]"}
+{"question_id": 229, "response": "def g(df):\n    rows = df.max(axis=1) == 2\n    cols = df.max(axis=0) == 2\n    df.loc[rows] = 0\n    df.loc[:, cols] = 0\n    return df\n\nresult = g(df.copy())"}
+{"question_id": 230, "response": "result = s.sort_values(ascending=True).sort_index(ascending=True, level=0, key=lambda x: s[x])"}
+{"question_id": 231, "response": "df = pd.DataFrame({'index': s.index, 'value': s.values}).sort_values(['value', 'index'])"}
+{"question_id": 232, "response": "result = df[df['A'].astype(str).str.isdigit()]"}
+{"question_id": 233, "response": "result = df[df['A'].apply(lambda x: isinstance(x, str))]"}
+{"question_id": 234, "response": "result = df.loc[df.groupby(['Sp', 'Value'])['count'].transform('max') == df['count']]"}
+{"question_id": 235, "response": "df['Date'] = df['Member'].map(dict)"}
+{"question_id": 236, "response": "df['Date'] = df['Member'].map(lambda x: dict.get(x, '17/8/1926'))"}
+{"question_id": 237, "response": "df['Date'] = df['Member'].map(dict)\nresult = df\nreturn result"}
+{"question_id": 238, "response": "def g(df):\n    even_counts = df.groupby('Date').agg(lambda x: (x % 2 == 0).sum()).reset_index()\n    odd_counts = df.groupby('Date').agg(lambda x: (x % 2 == 1).sum()).reset_index()\n    return even_counts, odd_counts\n\nresult1, result2 = g(df.copy())"}
+{"question_id": 239, "response": "result = df.groupby('B').agg({'D': 'sum', 'E': 'mean'})"}
+{"question_id": 240, "response": "result = df.groupby('B').agg({'D': 'sum', 'E': 'mean'}).reset_index()"}
+{"question_id": 241, "response": "result = df.groupby('B').agg({'D': 'sum', 'E': 'mean'}).reset_index()"}
+{"question_id": 242, "response": "result = df.groupby('B').agg({'D': 'max', 'E': 'min'})"}
+{"question_id": 243, "response": "df['special_chars'] = df['str'].apply(lambda x: sum(not char.isalpha() for char in x))\ndf['special_chars'] = df['special_chars'].replace(0, pd.NA)"}
+{"question_id": 244, "response": "df['count'] = df['str'].apply(lambda x: sum(char.isalpha() for char in x))"}
+{"question_id": 245, "response": "df = pd.DataFrame(df['row'].str.split(' ').tolist(), columns=['fips', 'row'])"}
+{"question_id": 246, "response": "df = pd.DataFrame(df['row'].str.split(' ', n=2).tolist())"}
+{"question_id": 247, "response": "def g(df):\n    numeric_cols = df.columns[1:]\n    data = df[numeric_cols].astype(float).values\n    for i in range(data.shape[0]):\n        s = 0\n        cnt = 0\n        for j in range(data.shape[1] - 1, -1, -1):\n            if data[i, j] != 0:\n                cnt = min(cnt + 1, 2)\n                s = (s + data[i, j]) / cnt\n            data[i, j] = s\n    df[numeric_cols] = data\n    return df\n\ndf = g(df.copy())"}
+{"question_id": 248, "response": "def g(df):\n    numeric_cols = df.columns[1:]\n    data = df[numeric_cols].astype(float)\n    for idx in data.index:\n        s = 0\n        cnt = 0\n        for col in numeric_cols[::-1]:\n            if data.loc[idx, col] != 0:\n                s += data.loc[idx, col]\n                cnt += 1\n            data.loc[idx, col] = s / max(cnt, 1)\n    df[numeric_cols] = data\n    return df\n\ndf = g(df.copy())"}
+{"question_id": 249, "response": "df['Label'] = 0\ndf.loc[0, 'Label'] = 1\ndf.loc[1:, 'Label'] = (df['Close'].diff() > 0).astype(int)[1:]"}
+{"question_id": 250, "response": "df['Label'] = 1\ndf.loc[1:, 'Label'] = np.where(df['Close'].diff() > 0, 1, np.where(df['Close'].diff() == 0, 0, -1))"}
+{"question_id": 251, "response": "result = df[df['key2'] == 'one'].groupby('key1').size().reset_index(name='count')"}
+{"question_id": 252, "response": "result = df.groupby('key1')['key2'].apply(lambda x: x.str.endswith('e').sum()).reset_index()"}
+{"question_id": 253, "response": "def g(df):\n    return df.index.max(), df.index.min()\n\nmax_result, min_result = g(df.copy())"}
+{"question_id": 254, "response": "mode_result = df.index.mode()[0]\nmedian_result = pd.Series(df.index).median()"}
+{"question_id": 255, "response": "result = df[~df['closing_price'].between(99, 101)].copy()"}
+{"question_id": 256, "response": "result = df.loc[df.groupby('item')['diff'].idxmin()]"}
+{"question_id": 257, "response": "df['SOURCE_NAME'] = df['SOURCE_NAME'].str.rsplit('_', n=1).str[0]\nresult = df\n\nreturn result"}
+{"question_id": 258, "response": "def fill_nan(df):\n    nan_indices = df.index[df['Column_x'].isna()]\n    total_nan_len = len(nan_indices)\n    first_nan = total_nan_len // 2\n    df.loc[nan_indices[0:first_nan], 'Column_x'] = 0\n    df.loc[nan_indices[first_nan:total_nan_len], 'Column_x'] = 1\n    return df\n\ndf = fill_nan(df.copy())"}
+{"question_id": 259, "response": "def fill_nan(df):\n    nan_indices = df[df['Column_x'].isna()].index\n    total_nan_len = len(nan_indices)\n    first_nan = (total_nan_len * 3) // 10\n    middle_nan = (total_nan_len * 3) // 10\n    \n    df.loc[nan_indices[0:first_nan], 'Column_x'] = 0\n    df.loc[nan_indices[first_nan:first_nan + middle_nan], 'Column_x'] = 0.5\n    df.loc[nan_indices[first_nan + middle_nan:total_nan_len], 'Column_x'] = 1\n    return df\n\ndf = fill_nan(df.copy())"}
+{"question_id": 260, "response": "def fill_nan(df):\n    total_len = len(df)\n    zero_len = (df['Column_x'] == 0).sum()\n    nan_indices = df[df['Column_x'].isna()].index\n    total_nan_len = len(nan_indices)\n    first_nan = (total_len // 2) - zero_len\n    df.loc[nan_indices[0:first_nan], 'Column_x'] = 0\n    df.loc[nan_indices[first_nan:total_nan_len], 'Column_x'] = 1\n    return df\n\ndf = fill_nan(df.copy())"}
+{"question_id": 261, "response": "result = pd.concat([a, b, c], axis=1).groupby(level=0, axis=1).agg(list)"}
+{"question_id": 262, "response": "df['bin'] = pd.cut(df['views'], bins=bins, labels=range(1, len(bins)), right=True)\nresult = pd.crosstab(df['username'], df['bin']).values"}
+{"question_id": 263, "response": "result = ', '.join(df['text'].iloc[::-1])"}
+{"question_id": 264, "response": "df2 = pd.merge(df2, df1[['id', 'city', 'district']], on='id', how='left')\ndf2 = df2[['id', 'city', 'district', 'date', 'value']]\nresult = pd.concat([df1, df2], ignore_index=True)"}
+{"question_id": 265, "response": "df2 = pd.merge(df2, df1[['id', 'city', 'district']], on='id', how='left')\ndf2 = df2[['id', 'city', 'district', 'date', 'value']]\nresult = pd.concat([df1, df2], ignore_index=True)\nresult = result.sort_values(['id', 'date']).reset_index(drop=True)"}
+{"question_id": 266, "response": "result = pd.concat([C, D]).drop_duplicates(subset='A', keep='last').sort_values('A').reset_index(drop=True)"}
+{"question_id": 267, "response": "result = pd.concat([C, D]).drop_duplicates(subset='A', keep='last').reset_index(drop=True)"}
+{"question_id": 268, "response": "result = pd.concat([C, D]).drop_duplicates(subset='A', keep='last').sort_values('A').assign(duplicated=lambda x: x['A'].isin(D['A'])).reset_index(drop=True)"}
+{"question_id": 269, "response": "result = df.groupby('user')[['time', 'amount']].apply(lambda x: x.values.tolist()).to_numpy()"}
+{"question_id": 270, "response": "result = df.groupby('user').apply(lambda x: x.sort_values('time')[['time', 'amount']].values.tolist()).to_numpy()"}
+{"question_id": 271, "response": "def g(df):\n    result = {}\n    for user in df['user'].unique():\n        user_data = df[df['user'] == user]\n        sorted_data = user_data.sort_values('time', ascending=False)\n        result[user] = sorted_data[['time', 'amount']].values.tolist()\n    return result\n\nresult = g(df.copy())"}
+{"question_id": 272, "response": "df = pd.DataFrame(series.values.tolist(), index=series.index)"}
+{"question_id": 273, "response": "result = [col for col in df.columns if s in col and col != s]"}
+{"question_id": 274, "response": "result = pd.DataFrame(df['col1'].tolist()).values.flatten()"}
+{"question_id": 275, "response": "result = df['col1'].apply(lambda x: ','.join(map(str, x))).iloc[0]"}
+{"question_id": 276, "response": "df['TIME'] = pd.to_datetime(df['TIME'])\ndf['FORMATTED_TIME'] = df['TIME'].dt.strftime('%d-%b-%Y %a %T')\ndf['RANK'] = df.groupby('ID')['TIME'].rank(method='first', ascending=False).astype(int)\ndf = df[['ID', 'FORMATTED_TIME', 'RANK']]"}
+{"question_id": 277, "response": "result = df[filt[df.index.get_level_values(0)]]"}
+{"question_id": 278, "response": "result = df.loc[df.index.get_level_values('a').isin(filt[filt].index)].loc[df.index.get_level_values('b').isin(filt[filt].index)]"}
+{"question_id": 279, "response": "result = df.columns[df.iloc[0].isna() != df.iloc[8].isna()]"}
+{"question_id": 280, "response": "result = df.columns[df.iloc[0].isna() == df.iloc[8].isna()]"}
+{"question_id": 281, "response": "result = df.columns[df.iloc[0].fillna('Nan') != df.iloc[8].fillna('Nan')].tolist()"}
+{"question_id": 282, "response": "def g(df):\n    row0 = df.iloc[0].fillna(np.inf)\n    row8 = df.iloc[8].fillna(np.inf)\n    diff_cols = row0.index[row0 != row8]\n    result = list(zip(df.iloc[0][diff_cols], df.iloc[8][diff_cols]))\n    return result\n\nresult = g(df.copy())"}
+{"question_id": 283, "response": "df = pd.DataFrame(df.values.flatten().reshape(-1, 1), columns=['A'])"}
+{"question_id": 284, "response": "df['dogs'] = df['dogs'].round(2)"}
+{"question_id": 285, "response": "df = df.apply(lambda x: x.round(2) if pd.notna(x).all() else x)"}
+{"question_id": 286, "response": "def g(df, list_of_my_columns):\n    avg_values = df[list_of_my_columns].mean(axis=1)\n    min_values = df[list_of_my_columns].min(axis=1)\n    max_values = df[list_of_my_columns].max(axis=1)\n    median_values = df[list_of_my_columns].median(axis=1)\n    return avg_values, min_values, max_values, median_values\n\navg_values, min_values, max_values, median_values = g(df.copy(), list_of_my_columns.copy())"}
+{"question_id": 287, "response": "result = df.sort_index(level='time')"}
+{"question_id": 288, "response": "result = df.sort_values('VIM')"}
+{"question_id": 289, "response": "result = df[~df.index.strftime('%Y-%m-%d').isin(['2020-02-17', '2020-02-18'])]"}
+{"question_id": 290, "response": "to_delete = ['2020-02-17', '2020-02-18']\nmask = ~df.index.strftime('%Y-%m-%d').isin(to_delete)\nresult = df[mask].copy()\nresult.index = result.index.strftime('%d-%b-%Y %A')"}
+{"question_id": 291, "response": "def g(corr):\n    mask = np.triu(np.ones(corr.shape), k=1).astype(bool)\n    corr_triu = corr.values[mask]\n    indices = np.argwhere(mask)\n    filtered_indices = indices[corr_triu > 0.3]\n    filtered_values = corr_triu[corr_triu > 0.3]\n    return np.column_stack((filtered_indices, filtered_values))\n\nresult = g(corr.copy())"}
+{"question_id": 292, "response": "def g(corr):\n    corr_triu = pd.DataFrame(np.triu(corr, k=1))\n    pairs = []\n    for i in range(len(corr_triu)):\n        for j in range(len(corr_triu.columns)):\n            if j > i and corr_triu.iloc[i,j] > 0.3:\n                pairs.append((i, j, corr_triu.iloc[i,j]))\n    return pairs\n\nresult = g(corr.copy())"}
+{"question_id": 293, "response": "def g(df):\n    df.columns.values[-1] = 'Test'\n    return df\n\nresult = g(df.copy())"}
+{"question_id": 294, "response": "def g(df):\n    df = df.copy()\n    df.columns.values[0] = 'Test'\n    return df, df.columns.values\n\nresult = g(df)"}
+{"question_id": 295, "response": "df['most_frequent'] = df.mode(axis=1).iloc[:, 0]\ndf['frequency_count'] = df.apply(lambda x: x.value_counts().iloc[0], axis=1)"}
+{"question_id": 296, "response": "df['most_frequent'] = df.mode(axis=1).iloc[:, 0]\ndf['frequency_count'] = df.apply(lambda x: x.value_counts().iloc[0], axis=1)"}
+{"question_id": 297, "response": "def find_frequent(df):\n    frequent = []\n    freq_count = []\n    for _, row in df.iterrows():\n        value_counts = row.value_counts()\n        max_count = value_counts.max()\n        frequent_values = sorted(value_counts[value_counts == max_count].index.tolist())\n        frequent.append(frequent_values)\n        freq_count.append(max_count)\n    return pd.Series(frequent), pd.Series(freq_count)\n\nresult = find_frequent(df)"}
+{"question_id": 298, "response": "df['bar'] = pd.to_numeric(df['bar'].replace('NULL', 0))\nresult = df.groupby(['id1', 'id2']).agg({'foo': 'mean', 'bar': 'mean'}).reset_index()"}
+{"question_id": 299, "response": "result = pd.merge(df_a, df_b[['EntityNum', 'a_col']], on='EntityNum')[['EntityNum', 'foo', 'a_col']]"}

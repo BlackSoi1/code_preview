@@ -1,0 +1,30 @@
+{"operation": "Filtering Rows", "postgreSQL": "SELECT * FROM table WHERE column = 'value'", "pandas": "table[table['column'] == 'value']"}
+{"operation": "Filtering with Multiple Conditions", "postgreSQL": "SELECT * FROM table WHERE column1 = 'value1' AND column2 > value2", "pandas": "table[(table['column1'] == 'value1') & (table['column2'] > value2)]"}
+{"operation": "Filtering with OR", "postgreSQL": "SELECT * FROM table WHERE column1 = 'value1' OR column2 > value2", "pandas": "table[(table['column1'] == 'value1') | (table['column2'] > value2)]"}
+{"operation": "Joining Tables", "postgreSQL": "SELECT * FROM table1 INNER JOIN table2 ON table1.column = table2.column", "pandas": "pd.merge(table1, table2, on='column', how='inner')"}
+{"operation": "Left Join", "postgreSQL": "SELECT * FROM table1 LEFT JOIN table2 ON table1.column = table2.column", "pandas": "pd.merge(table1, table2, on='column', how='left')"}
+{"operation": "Right Join", "postgreSQL": "SELECT * FROM table1 RIGHT JOIN table2 ON table1.column = table2.column", "pandas": "pd.merge(table1, table2, on='column', how='right')"}
+{"operation": "Aggregations", "postgreSQL": "SELECT SUM(column) FROM table", "pandas": "table['column'].sum()"}
+{"operation": "Group By with Aggregation", "postgreSQL": "SELECT column, SUM(column2) FROM table GROUP BY column", "pandas": "table.groupby('column')['column2'].sum().reset_index()"}
+{"operation": "Complex Aggregation with Filtering", "postgreSQL": "SELECT column, SUM(column2) FROM table WHERE condition GROUP BY column", "pandas": "table[condition].groupby('column')['column2'].sum().reset_index()"}
+{"operation": "Sorting", "postgreSQL": "SELECT * FROM table ORDER BY column DESC", "pandas": "table.sort_values(by='column', ascending=False)"}
+{"operation": "Sorting with Aggregation", "postgreSQL": "SELECT column, SUM(column2) FROM table GROUP BY column ORDER BY SUM(column2) DESC", "pandas": "grouped_df = table.groupby('column')['column2'].sum().reset_index(); grouped_df.sort_values(by='column2', ascending=False)"}
+{"operation": "Finding Unique Values", "postgreSQL": "SELECT DISTINCT column FROM table", "pandas": "table['column'].unique()"}
+{"operation": "Count Unique Values", "postgreSQL": "SELECT COUNT(DISTINCT column) FROM table", "pandas": "table['column'].nunique()"}
+{"operation": "String Operations", "postgreSQL": "SELECT SUBSTRING(column FROM start FOR length) FROM table", "pandas": "table['column'].str.slice(start-1, start-1+length)"}
+{"operation": "String Matching", "postgreSQL": "SELECT * FROM table WHERE column LIKE '%value%'", "pandas": "table[table['column'].str.contains('value')]"}
+{"operation": "Date Conversion", "postgreSQL": "SELECT * FROM table WHERE DATE(column) = 'date_value'", "pandas": "table['column'] = pd.to_datetime(table['column']); table[table['column'].dt.date == 'date_value']"}
+{"operation": "Date Extraction", "postgreSQL": "SELECT EXTRACT(YEAR FROM column) FROM table", "pandas": "table['column'] = pd.to_datetime(table['column']); table['year'] = table['column'].dt.year"}
+{"operation": "Date Range Filtering", "postgreSQL": "SELECT * FROM table WHERE DATE(column) BETWEEN 'start_date' AND 'end_date'", "pandas": "table['column'] = pd.to_datetime(table['column']); table[(table['column'] >= 'start_date') & (table['column'] <= 'end_date')]"}
+{"operation": "Calculating Percentages", "postgreSQL": "SELECT (SUM(CASE WHEN condition THEN 1 ELSE 0 END) * 100.0) / COUNT(*) FROM table", "pandas": "(table[condition].shape[0] / len(table)) * 100"}
+{"operation": "Handling NULL Values", "postgreSQL": "SELECT * FROM table WHERE column IS NOT NULL", "pandas": "table[table['column'].notnull()]"}
+{"operation": "Handling NULL Values with Condition", "postgreSQL": "SELECT * FROM table WHERE column IS NULL", "pandas": "table[table['column'].isnull()]"}
+{"operation": "Conditional Aggregation", "postgreSQL": "SELECT SUM(CASE WHEN condition THEN column ELSE 0 END) FROM table", "pandas": "table.loc[condition, 'column'].sum()"}
+{"operation": "Nested Queries", "postgreSQL": "SELECT column FROM table WHERE column IN (SELECT column FROM table2 WHERE condition)", "pandas": "filtered_table2 = table2[condition]; table[table['column'].isin(filtered_table2['column'].values)]"}
+{"operation": "Applying Functions", "postgreSQL": "SELECT column, FUNCTION(column) AS new_column FROM table", "pandas": "table['new_column'] = table['column'].apply(function)"}
+{"operation": "Finding Maximum Value", "postgreSQL": "SELECT MAX(column) FROM table", "pandas": "table['column'].max()"}
+{"operation": "Finding Minimum Value", "postgreSQL": "SELECT MIN(column) FROM table", "pandas": "table['column'].min()"}
+{"operation": "Finding Averages", "postgreSQL": "SELECT AVG(column) FROM table", "pandas": "table['column'].mean()"}
+{"operation": "Row Count", "postgreSQL": "SELECT COUNT(*) FROM table WHERE condition", "pandas": "table[condition].shape[0]"}
+{"operation": "Limit Rows", "postgreSQL": "SELECT * FROM table LIMIT n", "pandas": "table.head(n)"}
+{"operation": "Complex Joins and Aggregations", "postgreSQL": "SELECT table1.column, SUM(table2.column2) FROM table1 INNER JOIN table2 ON table1.column = table2.column GROUP BY table1.column", "pandas": "merged_df = pd.merge(table1, table2, on='column', how='inner'); grouped_df = merged_df.groupby('column')['column2'].sum().reset_index()"}
