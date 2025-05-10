@@ -13,7 +13,7 @@ pip install -r requirements.txt
 Download and install the postgresql from the official website: https://www.postgresql.org/download/
 Download the pgAdmin4 from the official website: https://www.pgadmin.org/download/ (Recommended to monitor the database)
 In pgADmin4/terminal create a new database you prefer
-Construct the database by run the following command (You can find PostgreSQL version database in the data_preview folder):
+Construct the database by run the following command (You can find PostgreSQL & Pandas version database in the HF dataset):
 ```bash
 psql -U USERNAME -d DB_NAME -f postgresql_db.sql
 ```
