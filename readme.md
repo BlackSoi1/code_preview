@@ -24,6 +24,9 @@ Use the `prompt_generator.py` under each category folder of prompt folder to gen
 python prompt_generator.py --data_path <data_path> --prompt_base <prompt_base>
 ```
 
+### Grammar Book
+The folder [`database`](./src/rag/database) contains the grammar book we used for our RAG based method. Under the folder, api_doc.jsonl is used for the data management and deep learning code translation and guidelines.jsonl is used for the data querying code translation.
+
 ## Inference
 Use the script [`gpt_infer.py`](./src/gpt_infer.py) to inference with proprietary model such as GPT-4 and Claude-3.5-Sonnet. You have to set your API key in the script. Use the script [`vllm_infer.py`](./src/vllm_infer.py) to inference with local models with VLLM API. Make sure to set the correct `prompt_folder` and `output_folder` in the `run_inference.sh` script.
 ```bash
