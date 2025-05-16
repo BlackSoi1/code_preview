@@ -2,6 +2,9 @@
 
 This is the preview codebase for the benchmark DS-CodeBridge. Contains the prompt folder, example output, and the source code.
 
+## HuggingFace Dataset
+https://huggingface.co/datasets/xia01ongLi/DS-CodeBridge
+
 ## Environment Setup
 ```bash
 conda create -n ds-codebridge python=3.10
